@@ -3,7 +3,7 @@ import React, { CSSProperties } from "react";
 import cn from "classnames";
 
 const Button = (props: ButtonProps) => {
-  const background = props.backgroundColor || "#000";
+  const background = props.backgroundColor || "var(--primary-color)";
   const color = props.color || "#fff";
 
   return (

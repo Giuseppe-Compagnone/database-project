@@ -3,6 +3,7 @@ import { Button, Card } from "./../../components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faEyeSlash } from "@fortawesome/free-regular-svg-icons";
 import { faEnvelope } from "@fortawesome/free-solid-svg-icons";
+import { Link } from "react-router-dom";
 
 const LoginPage = () => {
   //States
@@ -13,6 +14,7 @@ const LoginPage = () => {
       <Card
         children={
           <>
+            <h1 className="title">Login</h1>
             <form
               className="form"
               onSubmit={(e) => {
@@ -53,6 +55,9 @@ const LoginPage = () => {
           </>
         }
       />
+      <Link to={"/signup"} className="redirect">
+        Do not have an account?? Signup!
+      </Link>
     </div>
   );
 };

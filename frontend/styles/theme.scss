@@ -1,1 +1,16 @@
 // Theme
+
+@import url("https://fonts.googleapis.com/css2?family=Inter:slnt,wght@-10..0,100..900&display=swap");
+
+// Fonts
+:root {
+  --primary-font: "Inter", sans-serif;
+}
+
+// Colors
+:root {
+  --primary-color: #1a73e8;
+  --primary-color-trs: #1a73e81f;
+  --secondary-color: #202124;
+  --secondary-color-trs: #2021240a;
+}

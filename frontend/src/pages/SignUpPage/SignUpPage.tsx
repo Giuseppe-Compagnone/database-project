@@ -11,6 +11,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { faEnvelope, faFaceSmile } from "@fortawesome/free-regular-svg-icons";
 import classNames from "classnames";
+import { Link } from "react-router-dom";
 
 const SignUpPage = () => {
   //States
@@ -22,6 +23,7 @@ const SignUpPage = () => {
       <Card
         children={
           <>
+            <h1 className="title">Create Account</h1>
             <form
               className="form"
               onSubmit={(e) => {
@@ -161,6 +163,9 @@ const SignUpPage = () => {
           </>
         }
       />
+      <Link to={"/login"} className="redirect">
+        Already have an account? Login!
+      </Link>
     </div>
   );
 };

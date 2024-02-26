@@ -1,0 +1,41 @@
+.course {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-direction: column;
+  border: 1px solid var(--secondary-color-trs);
+  width: 15rem;
+  height: 8rem;
+  position: relative;
+  border-radius: 1.2rem;
+  cursor: pointer;
+  gap: 0.2rem;
+
+  &::after {
+    content: "";
+    display: block;
+    width: calc(100% + 1.5px);
+    height: 2.5rem;
+    position: absolute;
+    top: -1px;
+    left: -1px;
+    border-radius: 1.2rem 1.2rem 0 0;
+    background: var(--primary-color);
+  }
+
+  .user-picture {
+    z-index: 4;
+    margin-top: 0.5rem;
+  }
+
+  .name {
+    font-size: 1.2rem;
+    font-weight: bold;
+    text-transform: capitalize;
+  }
+
+  .teacher {
+    font-size: 0.8rem;
+    opacity: 0.6;
+  }
+}

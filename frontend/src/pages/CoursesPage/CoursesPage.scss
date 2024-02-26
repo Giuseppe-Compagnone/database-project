@@ -1,0 +1,14 @@
+@import "./components/components.scss";
+
+.courses-page {
+  .title {
+    margin-bottom: 2rem;
+  }
+
+  .courses-grid {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    grid-gap: 20px;
+  }
+}

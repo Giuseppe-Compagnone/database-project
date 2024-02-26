@@ -56,7 +56,7 @@ const LoginPage = () => {
         }
       />
       <Link to={"/signup"} className="redirect">
-        Do not have an account?? Signup!
+        Do not have an account? Signup!
       </Link>
     </div>
   );

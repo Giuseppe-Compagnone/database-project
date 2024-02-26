@@ -1,7 +1,14 @@
 import React from "react";
 import "./../styles/main.scss";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import { CoursesPage, HomePage, LoginPage, SignUpPage } from "./pages";
+import {
+  CoursePage,
+  CoursesPage,
+  HomePage,
+  LoginPage,
+  PerformancesPage,
+  SignUpPage,
+} from "./pages";
 import { ToastContainer } from "react-toastify";
 import { Navbar } from "./components";
 
@@ -17,7 +24,9 @@ const App = () => {
             <Route path="/" element={<HomePage />}></Route>
             <Route path="/login" element={<LoginPage />}></Route>
             <Route path="/signup" element={<SignUpPage />}></Route>
+            <Route path="/course" element={<CoursePage />}></Route>
             <Route path="/courses" element={<CoursesPage />}></Route>
+            <Route path="/performances" element={<PerformancesPage />}></Route>
           </Routes>
         </Navbar>
       </BrowserRouter>

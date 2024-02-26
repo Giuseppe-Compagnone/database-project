@@ -1,0 +1,30 @@
+.performance {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  border: 2px solid var(--secondary-color-trs);
+  transition: all 0.2s ease-in-out;
+  padding: 1rem;
+  border-radius: 1rem;
+  gap: 1.5rem;
+
+  &:hover {
+    border: 2px solid var(--primary-color);
+  }
+
+  .title {
+    text-transform: capitalize;
+  }
+
+  .date {
+    opacity: 0.6;
+  }
+
+  .evaluation {
+    color: white;
+    background: var(--primary-color);
+    padding: 0.3rem;
+    border-radius: 0.5rem;
+  }
+}

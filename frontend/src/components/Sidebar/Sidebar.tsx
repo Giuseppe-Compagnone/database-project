@@ -2,7 +2,11 @@ import React from "react";
 import { SidebarProps } from "./Sidebar.types";
 import classNames from "classnames";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faChalkboard, faHouse } from "@fortawesome/free-solid-svg-icons";
+import {
+  faArrowUp19,
+  faChalkboard,
+  faHouse,
+} from "@fortawesome/free-solid-svg-icons";
 import { useLocation, useNavigate } from "react-router";
 
 const Sidebar = (props: SidebarProps) => {
@@ -31,6 +35,15 @@ const Sidebar = (props: SidebarProps) => {
               onClick={() => navigate("/courses")}
             >
               <FontAwesomeIcon icon={faChalkboard} /> Courses
+            </div>
+            <div
+              className={classNames(
+                "page",
+                pathname === "/performances" && "active"
+              )}
+              onClick={() => navigate("/performances")}
+            >
+              <FontAwesomeIcon icon={faArrowUp19} /> Performances
             </div>
           </>
         )}

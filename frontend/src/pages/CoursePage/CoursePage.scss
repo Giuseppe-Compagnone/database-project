@@ -1,0 +1,44 @@
+@import "./components/components.scss";
+.course-page {
+  .header {
+    position: relative;
+    padding-bottom: 2rem;
+    margin-bottom: 2rem;
+
+    &:after {
+      content: "";
+      display: block;
+      background: var(--secondary-color-trs);
+      height: 1px;
+      width: calc(100% + 4rem);
+      position: absolute;
+      left: -2rem;
+      top: 100%;
+    }
+
+    .teacher {
+      font-size: 0.8rem;
+      opacity: 0.6;
+    }
+
+    .enrolleds {
+      position: absolute;
+      top: calc(50% - 1rem);
+      transform: translateY(-50%);
+      right: 2rem;
+      color: white;
+      background: var(--primary-color);
+      padding: 0.3rem;
+      border-radius: 0.5rem;
+    }
+  }
+
+  .materials {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex-direction: column;
+    margin-top: 2rem;
+    gap: 1.5rem;
+  }
+}

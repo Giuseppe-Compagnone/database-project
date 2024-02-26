@@ -1,0 +1,28 @@
+.material {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  border: 2px solid var(--secondary-color-trs);
+  transition: all 0.2s ease-in-out;
+  padding: 1rem;
+  border-radius: 1rem;
+  gap: 1.5rem;
+
+  &:hover {
+    border: 2px solid var(--primary-color);
+  }
+
+  .info {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    flex-direction: column;
+    flex: 1;
+    gap: 0.5rem;
+
+    .title {
+      text-transform: capitalize;
+    }
+  }
+}

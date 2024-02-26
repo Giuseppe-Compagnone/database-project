@@ -29,6 +29,7 @@ a {
   flex-direction: column;
   gap: 1rem;
   width: 100%;
+  margin-top: 1rem;
 
   .field-wrapper {
     display: flex;
@@ -86,6 +87,10 @@ a {
       &:focus {
         border: 2px solid var(--primary-color);
       }
+    }
+
+    input[type="date"] {
+      padding-right: 0.5rem;
     }
 
     select {

@@ -15,41 +15,49 @@ const Sidebar = (props: SidebarProps) => {
   const { pathname } = useLocation();
 
   return (
-    <div className="sidebar">
-      <div className={classNames("sidebar-col", props.isOpened && "opened")}>
-        {props.isOpened && (
-          <>
-            <div
-              className={classNames("page", pathname === "/" && "active")}
-              onClick={() => {
-                navigate("/");
-              }}
-            >
-              <FontAwesomeIcon icon={faHouse} /> Home page
-            </div>
-            <div
-              className={classNames(
-                "page",
-                pathname === "/courses" && "active"
-              )}
-              onClick={() => navigate("/courses")}
-            >
-              <FontAwesomeIcon icon={faChalkboard} /> Courses
-            </div>
-            <div
-              className={classNames(
-                "page",
-                pathname === "/performances" && "active"
-              )}
-              onClick={() => navigate("/performances")}
-            >
-              <FontAwesomeIcon icon={faArrowUp19} /> Performances
-            </div>
-          </>
-        )}
-      </div>
-      <div className="content">{props.children}</div>
-    </div>
+    <>
+      {!props.blackList ? (
+        <div className="sidebar">
+          <div
+            className={classNames("sidebar-col", props.isOpened && "opened")}
+          >
+            {props.isOpened && (
+              <>
+                <div
+                  className={classNames("page", pathname === "/" && "active")}
+                  onClick={() => {
+                    navigate("/");
+                  }}
+                >
+                  <FontAwesomeIcon icon={faHouse} /> Home page
+                </div>
+                <div
+                  className={classNames(
+                    "page",
+                    pathname === "/courses" && "active"
+                  )}
+                  onClick={() => navigate("/courses")}
+                >
+                  <FontAwesomeIcon icon={faChalkboard} /> Courses
+                </div>
+                <div
+                  className={classNames(
+                    "page",
+                    pathname === "/performances" && "active"
+                  )}
+                  onClick={() => navigate("/performances")}
+                >
+                  <FontAwesomeIcon icon={faArrowUp19} /> Performances
+                </div>
+              </>
+            )}
+          </div>
+          <div className="content">{props.children}</div>
+        </div>
+      ) : (
+        props.children
+      )}
+    </>
   );
 };
 

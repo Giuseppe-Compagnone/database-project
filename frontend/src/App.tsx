@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./../styles/main.scss";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import {
@@ -22,11 +22,11 @@ const App = () => {
         <Navbar blacklist={blacklist}>
           <Routes>
             <Route path="/" element={<HomePage />}></Route>
-            <Route path="/login" element={<LoginPage />}></Route>
-            <Route path="/signup" element={<SignUpPage />}></Route>
-            <Route path="/course" element={<CoursePage />}></Route>
+            <Route path="/course/:title" element={<CoursePage />}></Route>
             <Route path="/courses" element={<CoursesPage />}></Route>
             <Route path="/performances" element={<PerformancesPage />}></Route>
+            <Route path="/login" element={<LoginPage />}></Route>
+            <Route path="/signup" element={<SignUpPage />}></Route>
           </Routes>
         </Navbar>
       </BrowserRouter>

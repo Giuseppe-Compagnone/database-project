@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Button, Card } from "../../components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -12,11 +12,31 @@ import {
 import { faEnvelope, faFaceSmile } from "@fortawesome/free-regular-svg-icons";
 import classNames from "classnames";
 import { Link } from "react-router-dom";
+import { Student, Teacher } from "./../../../models";
+
+export interface SignUpInfo {
+  name: string;
+  surname: string;
+  email: string;
+  password: string;
+  confirm: string;
+  specialization: string;
+  details: string;
+}
 
 const SignUpPage = () => {
   //States
   const [canSee, setCanSee] = useState<boolean>(false);
   const [type, setType] = useState<"teacher" | "student">("student");
+  const [values, setValues] = useState<SignUpInfo>({
+    name: "",
+    surname: "",
+    email: "",
+    password: "",
+    confirm: "",
+    specialization: "",
+    details: "",
+  });
 
   return (
     <div className="sign-up-page">
@@ -28,7 +48,6 @@ const SignUpPage = () => {
               className="form"
               onSubmit={(e) => {
                 e.preventDefault();
-                console.log("Submit");
               }}
             >
               <div className="field-wrapper">
@@ -57,6 +76,14 @@ const SignUpPage = () => {
                   type="text"
                   placeholder="Your name..."
                   name="name"
+                  value={values.name}
+                  onChange={(e) => {
+                    setValues((old) => {
+                      old.name = e.target.value;
+
+                      return { ...old };
+                    });
+                  }}
                   required
                 />
               </div>
@@ -69,6 +96,14 @@ const SignUpPage = () => {
                   type="text"
                   placeholder="Your surname..."
                   name="surname"
+                  value={values.surname}
+                  onChange={(e) => {
+                    setValues((old) => {
+                      old.surname = e.target.value;
+
+                      return { ...old };
+                    });
+                  }}
                   required
                 />
               </div>
@@ -81,6 +116,14 @@ const SignUpPage = () => {
                   type="email"
                   placeholder="Your mail..."
                   name="mail"
+                  value={values.email}
+                  onChange={(e) => {
+                    setValues((old) => {
+                      old.email = e.target.value;
+
+                      return { ...old };
+                    });
+                  }}
                   required
                 />
               </div>
@@ -98,6 +141,14 @@ const SignUpPage = () => {
                   type={canSee ? "text" : "password"}
                   placeholder="Your Password..."
                   name="pass"
+                  value={values.password}
+                  onChange={(e) => {
+                    setValues((old) => {
+                      old.password = e.target.value;
+
+                      return { ...old };
+                    });
+                  }}
                   required
                 />
               </div>
@@ -115,6 +166,14 @@ const SignUpPage = () => {
                   type={canSee ? "text" : "password"}
                   placeholder="Confirm your Password..."
                   name="confirm"
+                  value={values.confirm}
+                  onChange={(e) => {
+                    setValues((old) => {
+                      old.confirm = e.target.value;
+
+                      return { ...old };
+                    });
+                  }}
                   required
                 />
               </div>
@@ -139,6 +198,14 @@ const SignUpPage = () => {
                     <textarea
                       name="optional"
                       placeholder="Other info..."
+                      value={values.details}
+                      onChange={(e) => {
+                        setValues((old) => {
+                          old.details = e.target.value;
+
+                          return { ...old };
+                        });
+                      }}
                       required={false}
                     />
                   </>
@@ -148,6 +215,14 @@ const SignUpPage = () => {
                       type="text"
                       placeholder="your specialization..."
                       name="optional"
+                      value={values.specialization}
+                      onChange={(e) => {
+                        setValues((old) => {
+                          old.specialization = e.target.value;
+
+                          return { ...old };
+                        });
+                      }}
                       required
                     />
                   </>
@@ -156,7 +231,7 @@ const SignUpPage = () => {
               <Button
                 text={"Submit"}
                 onClick={() => {
-                  console.log("login");
+                  console.log("login", values);
                 }}
               />
             </form>

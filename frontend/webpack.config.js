@@ -1,6 +1,7 @@
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const CopyPlugin = require("copy-webpack-plugin");
+const Dotenv = require("dotenv-webpack");
 
 module.exports = {
   entry: "./src/index.tsx",
@@ -10,6 +11,7 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, "public", "build"),
     filename: "bundle.js",
+    publicPath: "/",
   },
   resolve: { extensions: [".js", ".jsx", ".json", ".ts", ".tsx"] },
   module: {
@@ -30,5 +32,6 @@ module.exports = {
     new CopyPlugin({
       patterns: [{ from: "images", to: "images" }],
     }),
+    new Dotenv(),
   ],
 };

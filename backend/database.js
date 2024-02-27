@@ -9,10 +9,59 @@ const pool = mysql
   })
   .promise();
 
-const getStudents = async () => {
-  const [rows] = await pool.query("SELECT * FROM STUDENT");
+export const registerStudent = async (
+  name,
+  surname,
+  email,
+  password,
+  other_details
+) => {
+  const [rows] = await pool.query(
+    `
+      INSERT INTO STUDENT ( name, surname, email, password, performance_avg, other_details)
+    VALUES (?, ?, ?, ?, 0, ?)
+      `,
+    [name, surname, email, password, other_details]
+  );
   return rows;
 };
 
-const students = await getStudents();
-console.log("ALL STUDENTS:", students);
+export const registerTeacher = async (
+  name,
+  surname,
+  email,
+  password,
+  specialization
+) => {
+  const [rows] = await pool.query(
+    `
+    INSERT INTO TEACHER ( name, surname, email, password, specialization)
+    VALUES ( ?, ?, ?, ?, ?),
+  `,
+    [name, surname, email, password, specialization]
+  );
+  return rows;
+};
+
+export const login = async (email, password) => {
+  let [rows] = await pool.query(
+    `
+    SELECT * FROM STUDENT
+    WHERE email = ?
+    AND password = ?
+  `,
+    [email, password]
+  );
+  if (rows.length <= 0) {
+    [rows] = await pool.query(
+      `
+      SELECT * FROM TEACHER
+      WHERE email = ?
+      AND password = ?
+    `,
+      [email, password]
+    );
+  }
+
+  return rows;
+};

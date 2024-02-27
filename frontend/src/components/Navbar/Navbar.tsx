@@ -17,8 +17,8 @@ const Navbar = (props: NavbarProps) => {
 
   return (
     <>
-      {!props.blacklist.includes(pathname) && (
-        <>
+      <>
+        {!props.blacklist.includes(pathname) && (
           <nav className="navbar">
             <div
               className={classNames("hamburger", isSidebarOpened && "opened")}
@@ -36,11 +36,15 @@ const Navbar = (props: NavbarProps) => {
               <UserPicture name={"Giuseppe Compagnone"} size={2.8} />
             </div>
           </nav>
-          <div className="page-content">
-            <Sidebar children={props.children} isOpened={isSidebarOpened} />
-          </div>
-        </>
-      )}
+        )}
+        <div className="page-content">
+          <Sidebar
+            children={props.children}
+            isOpened={isSidebarOpened}
+            blackList={props.blacklist.includes(pathname)}
+          />
+        </div>
+      </>
     </>
   );
 };

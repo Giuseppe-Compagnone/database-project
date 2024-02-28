@@ -54,7 +54,7 @@ const Navbar = (props: NavbarProps) => {
               <FontAwesomeIcon icon={faBars} />
             </div>
             <Link className="logo" to={"/"}>
-              <img src="build/images/logo.jpg" alt="logo" />
+              <img src="images/logo.jpg" alt="logo" />
               Elearning System
             </Link>
             <div className="separator"></div>

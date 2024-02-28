@@ -11,7 +11,7 @@ const HomePage = () => {
   return (
     <div className="home-page">
       <h1 className="title">Welcome to Elearning System</h1>
-      <img src="build/images/logo.jpg" alt="logo" className="logo" />
+      <img src="images/logo.jpg" alt="logo" className="logo" />
       <p className="text">Select a course to start</p>
       <Button
         text={"Courses"}

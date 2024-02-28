@@ -17,6 +17,7 @@
     flex-direction: column;
     padding: 1rem 0;
     gap: 0.5rem;
+    position: relative;
 
     &.opened {
       width: 25rem;
@@ -35,6 +36,38 @@
 
       &.active {
         background: var(--primary-color-trs);
+      }
+    }
+
+    .sidebar-footer {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-top: 1px solid var(--secondary-color-trs);
+      padding: 1.2rem 0;
+      color: #00000099;
+
+      .text {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
+      }
+
+      .github {
+        font-size: 1.4rem;
+        transition: all 0.2s ease-in-out;
+        cursor: pointer;
+        color: #00000099;
+
+        &:hover {
+          color: #6e5494;
+          scale: 1.1;
+        }
       }
     }
   }

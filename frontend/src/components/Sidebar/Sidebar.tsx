@@ -9,6 +9,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { useLocation, useNavigate } from "react-router";
 import { useSqlService } from "../../../services";
+import { faGithub } from "@fortawesome/free-brands-svg-icons";
 
 const Sidebar = (props: SidebarProps) => {
   //Hooks
@@ -53,6 +54,18 @@ const Sidebar = (props: SidebarProps) => {
                     <FontAwesomeIcon icon={faArrowUp19} /> Performances
                   </div>
                 )}
+                <div className="sidebar-footer">
+                  <p className="text">
+                    Author: Giuseppe Compagnone{" "}
+                    <a
+                      href="https://github.com/Giuseppe-Compagnone"
+                      target="_blank"
+                      className="github"
+                    >
+                      <FontAwesomeIcon icon={faGithub} />
+                    </a>
+                  </p>
+                </div>
               </>
             )}
           </div>

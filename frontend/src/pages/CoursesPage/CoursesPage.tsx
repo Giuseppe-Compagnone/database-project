@@ -35,7 +35,7 @@ const CoursesPage = () => {
     if (type === "student") {
       try {
         const res = await axios.get(
-          `${process.env.SERVER}/courses/student/${
+          `${process.env.REACT_APP_SERVER}/courses/student/${
             (user as StudentModel).student_id
           }`
         );
@@ -47,7 +47,7 @@ const CoursesPage = () => {
     } else {
       try {
         const res = await axios.get(
-          `${process.env.SERVER}/courses/teacher/${
+          `${process.env.REACT_APP_SERVER}/courses/teacher/${
             (user as TeacherModel).teacher_id
           }`
         );
@@ -70,7 +70,7 @@ const CoursesPage = () => {
       return;
     }
     try {
-      await axios.post(`${process.env.SERVER}/create-course`, {
+      await axios.post(`${process.env.REACT_APP_SERVER}/create-course`, {
         title: info.name,
         description: info.description,
         responsibleTeacherId: (user as TeacherModel).teacher_id,
@@ -95,7 +95,7 @@ const CoursesPage = () => {
     }
 
     try {
-      await axios.post(`${process.env.SERVER}/enroll`, {
+      await axios.post(`${process.env.REACT_APP_SERVER}/enroll`, {
         studentId: (user as StudentModel).student_id,
         courseName: newCourse,
         date: new Date().toISOString().substring(0, 10),

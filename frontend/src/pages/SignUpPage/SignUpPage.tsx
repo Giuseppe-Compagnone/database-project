@@ -55,7 +55,7 @@ const SignUpPage = () => {
     password.update(values.password);
     try {
       if (type === "student") {
-        await axios.post(`${process.env.SERVER}/signup/student`, {
+        await axios.post(`${process.env.REACT_APP_SERVER}/signup/student`, {
           name: values.name,
           surname: values.surname,
           email: values.email,
@@ -63,7 +63,7 @@ const SignUpPage = () => {
           other_details: values.details,
         });
       } else {
-        await axios.post(`${process.env.SERVER}/signup/teacher`, {
+        await axios.post(`${process.env.REACT_APP_SERVER}/signup/teacher`, {
           name: values.name,
           surname: values.surname,
           email: values.email,

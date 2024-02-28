@@ -6,7 +6,7 @@ const HomePage = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    console.log(process.env.SERVER);
+    console.log(process.env.REACT_APP_SERVER);
   }, []);
   return (
     <div className="home-page">

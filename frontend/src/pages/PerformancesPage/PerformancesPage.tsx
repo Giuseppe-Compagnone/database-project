@@ -26,7 +26,7 @@ const PerformancesPage = (props: PerformancesPageProps) => {
     if (user !== null) {
       try {
         const res = await axios.get(
-          `${process.env.SERVER}/performances/${
+          `${process.env.REACT_APP_SERVER}/performances/${
             (user as StudentModel).student_id
           }`
         );

@@ -33,7 +33,7 @@ const LoginPage = () => {
     const password = hasher.hex();
 
     try {
-      const res = await axios.post(`${process.env.SERVER}/login`, {
+      const res = await axios.post(`${process.env.REACT_APP_SERVER}/login`, {
         email: info.mail,
         password: password,
       });

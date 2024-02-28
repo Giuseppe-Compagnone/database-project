@@ -60,7 +60,9 @@ const CoursePage = () => {
   const fetchCourse = async () => {
     if (title) {
       try {
-        const res = await axios.get(`${process.env.SERVER}/course/${title}`);
+        const res = await axios.get(
+          `${process.env.REACT_APP_SERVER}/course/${title}`
+        );
         setCourse(res.data);
       } catch (err) {
         console.log(err);
@@ -73,7 +75,7 @@ const CoursePage = () => {
     if (course) {
       try {
         const res = await axios.get(
-          `${process.env.SERVER}/materials/${course.course_id}`
+          `${process.env.REACT_APP_SERVER}/materials/${course.course_id}`
         );
         setMaterials(res.data);
       } catch (err) {
@@ -86,7 +88,7 @@ const CoursePage = () => {
   const uploadMaterial = async () => {
     if (course !== null) {
       try {
-        await axios.post(`${process.env.SERVER}/upload-material`, {
+        await axios.post(`${process.env.REACT_APP_SERVER}/upload-material`, {
           title: materialInfo.name,
           description: materialInfo.desc,
           fileOrLink: materialInfo.link,
@@ -113,7 +115,7 @@ const CoursePage = () => {
       }
 
       try {
-        await axios.post(`${process.env.SERVER}/upload-performance`, {
+        await axios.post(`${process.env.REACT_APP_SERVER}/upload-performance`, {
           email: performanceInfo.mail,
           courseId: course.course_id.toString(),
           evaluation: performanceInfo.evaluation,

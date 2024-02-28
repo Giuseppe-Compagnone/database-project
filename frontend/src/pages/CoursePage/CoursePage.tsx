@@ -27,7 +27,6 @@ export interface UploadPerformaceInfo {
 
 const CoursePage = () => {
   //States
-  const [evaluation, setEvaluation] = useState<string>("");
   const [course, setCourse] = useState<CourseModel | null>(null);
   const [materials, setMaterials] = useState<Array<CourseMaterialModel> | null>(
     null
@@ -36,6 +35,10 @@ const CoursePage = () => {
     name: "",
     desc: "",
     link: "",
+  });
+  const [performanceInfo, setPerformanceInfo] = useState<UploadPerformaceInfo>({
+    mail: "",
+    evaluation: "",
   });
 
   //Hooks
@@ -83,15 +86,40 @@ const CoursePage = () => {
   const uploadMaterial = async () => {
     if (course !== null) {
       try {
-        await axios.post(`${process.env.SERVER}/update-material`, {
+        await axios.post(`${process.env.SERVER}/upload-material`, {
           title: materialInfo.name,
           description: materialInfo.desc,
           fileOrLink: materialInfo.link,
           publicationDate: new Date().toISOString().substring(0, 10),
           courseId: course.course_id,
         });
-        NotificationHandler.instance.success("Uploaded"), setMaterials(null);
+        NotificationHandler.instance.success("Uploaded");
+        setMaterials(null);
         await fetchMaterial();
+      } catch (err) {
+        console.log(err);
+        NotificationHandler.instance.error("Error on upload");
+      }
+    }
+  };
+
+  const uploadPerformance = async () => {
+    if (course !== null) {
+      if (parseInt(performanceInfo.evaluation) < 18) {
+        NotificationHandler.instance.error(
+          "Evaluation must be between 18 and 30"
+        );
+        return;
+      }
+
+      try {
+        await axios.post(`${process.env.SERVER}/upload-performance`, {
+          email: performanceInfo.mail,
+          courseId: course.course_id.toString(),
+          evaluation: performanceInfo.evaluation,
+          completionDate: new Date().toISOString().substring(0, 10),
+        });
+        NotificationHandler.instance.success("Uploaded");
       } catch (err) {
         console.log(err);
         NotificationHandler.instance.error("Error on upload");
@@ -227,6 +255,15 @@ const CoursePage = () => {
                   type="email"
                   placeholder="Student email..."
                   name="mail"
+                  required
+                  value={performanceInfo.mail}
+                  onChange={(e) => {
+                    setPerformanceInfo((old) => {
+                      old.mail = e.target.value;
+
+                      return { ...old };
+                    });
+                  }}
                 />
               </div>
 
@@ -239,23 +276,35 @@ const CoursePage = () => {
                   type="text"
                   placeholder="Student Evaluation"
                   name="eval"
-                  value={evaluation}
+                  required
+                  value={performanceInfo.evaluation}
                   onChange={(e) => {
-                    if (e.target.value === "") {
-                      setEvaluation("");
-                      return;
-                    }
-                    if (!/^-?\d*$/.test(e.target.value)) return;
-                    const evaluation = parseInt(e.target.value);
-                    if (evaluation > 30) {
-                      setEvaluation("30");
-                    } else {
-                      setEvaluation(evaluation.toString());
-                    }
+                    setPerformanceInfo((old) => {
+                      if (e.target.value === "") {
+                        old.evaluation = "";
+                      } else {
+                        if (/^-?\d*$/.test(e.target.value)) {
+                          const evaluation = parseInt(e.target.value);
+
+                          if (evaluation > 30) {
+                            old.evaluation = "30";
+                          } else {
+                            old.evaluation = evaluation.toString();
+                          }
+                        }
+                      }
+
+                      return { ...old };
+                    });
                   }}
                 />
               </div>
-              <Button text={"Upload"} onClick={async () => {}} />
+              <Button
+                text={"Upload"}
+                onClick={async () => {
+                  await uploadPerformance();
+                }}
+              />
             </form>
           </>
         )}

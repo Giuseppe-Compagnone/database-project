@@ -43,7 +43,9 @@ const PerformancesPage = (props: PerformancesPageProps) => {
       <div className="performances-page">
         <div className="header">
           <h1 className="title">Your Performances</h1>
-          <div className="average">Average: 0</div>
+          <div className="average">
+            Average: {(user as StudentModel)?.performance_avg || 0}
+          </div>
         </div>
         <div className="performances">
           {performances?.map((perf, i) => {

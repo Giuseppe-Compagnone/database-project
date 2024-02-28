@@ -191,3 +191,28 @@ export const getPerformances = async (id) => {
 
   return rows;
 };
+
+export const uploadPerformance = async (
+  email,
+  courseId,
+  evaluation,
+  completionDate
+) => {
+  const [rows] = await pool.query(
+    `
+  SELECT student_id FROM STUDENT
+  WHERE email = ?
+  `,
+    [email]
+  );
+
+  const studentId = rows[0].student_id;
+
+  await pool.query(
+    `
+  INSERT INTO STUDENT_PERFORMANCE ( student_id, course_id, evaluation, completion_date)
+  VALUES ( ?, ?, ?, ?)
+  `,
+    [studentId, courseId, evaluation, completionDate]
+  );
+};

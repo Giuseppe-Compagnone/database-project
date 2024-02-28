@@ -12,6 +12,7 @@ import {
   registerStudent,
   registerTeacher,
   uploadMaterial,
+  uploadPerformance,
 } from "./database.js";
 
 const app = express();
@@ -145,7 +146,7 @@ app.post("/enroll", async (req, res) => {
   }
 });
 
-app.post("/update-material", async (req, res) => {
+app.post("/upload-material", async (req, res) => {
   try {
     await uploadMaterial(
       req.body.title,
@@ -153,6 +154,21 @@ app.post("/update-material", async (req, res) => {
       req.body.fileOrLink,
       req.body.publicationDate,
       req.body.courseId
+    );
+    res.status(200).send();
+  } catch (err) {
+    console.log(err);
+    res.status(500).send();
+  }
+});
+
+app.post("/upload-performance", async (req, res) => {
+  try {
+    await uploadPerformance(
+      req.body.email,
+      req.body.courseId,
+      req.body.evaluation,
+      req.body.completionDate
     );
     res.status(200).send();
   } catch (err) {

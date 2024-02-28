@@ -16,6 +16,10 @@ const App = () => {
   //States
   const blacklist = ["/login", "/signup"];
 
+  useEffect(() => {
+    console.log("ENV", process.env.REACT_APP_SERVER);
+  });
+
   return (
     <div className="app">
       <BrowserRouter>

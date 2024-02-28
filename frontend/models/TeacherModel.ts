@@ -1,5 +1,5 @@
-export interface Teacher {
-  id: number;
+export interface TeacherModel {
+  student_id: number;
   name: string;
   surname: string;
   email: string;

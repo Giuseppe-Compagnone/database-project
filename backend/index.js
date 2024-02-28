@@ -1,24 +1,21 @@
 import express from "express";
+import cors from "cors";
 import { login, registerStudent, registerTeacher } from "./database.js";
 
 const app = express();
 app.use(express.json());
+app.use(cors());
 
 app.use((err, req, res, next) => {
   console.error(err.stack);
   res.status(500).send("Something broke!");
 });
 
-//Get
-
-app.get("/login", async (req, res) => {
-  const result = await login(req.body.email, req.body.password);
-  if (result[0]) {
-    res.json(result[0]);
-  } else {
-    res.status(500).send("Incorrect email or password.");
-  }
+app.get("/", async (req, res) => {
+  res.send("Server is running");
 });
+
+//Get
 
 //Post
 
@@ -33,6 +30,7 @@ app.post("/signup/student", async (req, res) => {
     );
     res.send("Registered successfully");
   } catch (err) {
+    console.log(err);
     res.status(500).send("Error on registration");
   }
 });
@@ -48,7 +46,17 @@ app.post("/signup/teacher", async (req, res) => {
     );
     res.send("Registered successfully");
   } catch (err) {
+    console.log(err);
     res.status(500).send("Error on registration");
+  }
+});
+
+app.post("/login", async (req, res) => {
+  const result = await login(req.body.email, req.body.password);
+  if (result[0]) {
+    res.json(result[0]);
+  } else {
+    res.status(500).send("Incorrect email or password.");
   }
 });
 

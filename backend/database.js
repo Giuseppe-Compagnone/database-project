@@ -36,7 +36,7 @@ export const registerTeacher = async (
   const [rows] = await pool.query(
     `
     INSERT INTO TEACHER ( name, surname, email, password, specialization)
-    VALUES ( ?, ?, ?, ?, ?),
+    VALUES ( ?, ?, ?, ?, ?)
   `,
     [name, surname, email, password, specialization]
   );

@@ -11,8 +11,10 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { faEnvelope, faFaceSmile } from "@fortawesome/free-regular-svg-icons";
 import classNames from "classnames";
-import { Link } from "react-router-dom";
-import { Student, Teacher } from "./../../../models";
+import { Link, useNavigate } from "react-router-dom";
+import { NotificationHandler } from "../../../utils";
+import axios from "axios";
+import { md5 } from "js-md5";
 
 export interface SignUpInfo {
   name: string;
@@ -38,6 +40,44 @@ const SignUpPage = () => {
     details: "",
   });
 
+  //Hooks
+  const navigate = useNavigate();
+
+  //Methods
+
+  const handleSubmit = async () => {
+    if (values.password !== values.confirm) {
+      NotificationHandler.instance.error("Passwords doesn't match");
+      return;
+    }
+
+    const password = md5.create();
+    password.update(values.password);
+    try {
+      if (type === "student") {
+        await axios.post(`${process.env.SERVER}/signup/student`, {
+          name: values.name,
+          surname: values.surname,
+          email: values.email,
+          password: password.hex(),
+          other_details: values.details,
+        });
+      } else {
+        await axios.post(`${process.env.SERVER}/signup/teacher`, {
+          name: values.name,
+          surname: values.surname,
+          email: values.email,
+          password: password.hex(),
+          specialization: values.specialization,
+        });
+      }
+      NotificationHandler.instance.success("Account created");
+      navigate("/login");
+    } catch (err) {
+      NotificationHandler.instance.error("Error on signup");
+    }
+  };
+
   return (
     <div className="sign-up-page">
       <Card
@@ -46,8 +86,10 @@ const SignUpPage = () => {
             <h1 className="title">Create Account</h1>
             <form
               className="form"
-              onSubmit={(e) => {
+              onSubmit={async (e) => {
                 e.preventDefault();
+                console.log("submit");
+                await handleSubmit();
               }}
             >
               <div className="field-wrapper">
@@ -228,12 +270,7 @@ const SignUpPage = () => {
                   </>
                 )}
               </div>
-              <Button
-                text={"Submit"}
-                onClick={() => {
-                  console.log("login", values);
-                }}
-              />
+              <Button text={"Submit"} onClick={() => {}} />
             </form>
           </>
         }

@@ -1,4 +1,4 @@
-export interface StudentPerformance {
+export interface StudentPerformanceModel {
   id: number;
   student: number | string;
   course: number | string;

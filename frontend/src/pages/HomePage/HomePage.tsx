@@ -1,10 +1,13 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Button } from "../../components";
 import { useNavigate } from "react-router";
 
 const HomePage = () => {
   const navigate = useNavigate();
 
+  useEffect(() => {
+    console.log(process.env.SERVER);
+  }, []);
   return (
     <div className="home-page">
       <h1 className="title">Welcome to Elearning System</h1>

@@ -1,4 +1,4 @@
-export interface Enrollment {
+export interface EnrollmentModel {
   id: number;
   student: number | string;
   course: number | string;

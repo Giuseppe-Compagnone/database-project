@@ -1,4 +1,4 @@
-export interface CourseMaterial {
+export interface CourseMaterialModel {
   id: number;
   title: string;
   desc: string;

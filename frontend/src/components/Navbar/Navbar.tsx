@@ -1,19 +1,37 @@
-import { useLocation } from "react-router";
+import { useLocation, useNavigate } from "react-router";
 import { NavbarProps } from "./Navbar.types";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import UserPicture from "../UserPicture";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars } from "@fortawesome/free-solid-svg-icons";
 import Sidebar from "../Sidebar";
 import classNames from "classnames";
+import { useSqlService } from "../../../services";
 
 const Navbar = (props: NavbarProps) => {
   //States
   const [isSidebarOpened, setIsSidebarOpened] = useState<boolean>(true);
 
   //Hooks
+
   const { pathname } = useLocation();
+  const { user } = useSqlService();
+  const navigate = useNavigate();
+
+  //Effects
+
+  useEffect(() => {
+    if (user) {
+      if (["/login", "/signup"].includes(pathname)) {
+        navigate("/");
+      }
+    } else {
+      if (!["/login", "/signup"].includes(pathname)) {
+        navigate("/login");
+      }
+    }
+  }, [pathname, user]);
 
   return (
     <>

@@ -24,11 +24,17 @@ const Navbar = (props: NavbarProps) => {
 
   useEffect(() => {
     if (user) {
-      if (["/login", "/signup"].includes(pathname)) {
+      if (
+        ["/login", "/signup"].includes(pathname) &&
+        !pathname.includes("build/images")
+      ) {
         navigate("/");
       }
     } else {
-      if (!["/login", "/signup"].includes(pathname)) {
+      if (
+        !["/login", "/signup"].includes(pathname) &&
+        !pathname.includes("build/images")
+      ) {
         navigate("/login");
       }
     }

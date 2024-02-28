@@ -3,9 +3,9 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 const CopyPlugin = require("copy-webpack-plugin");
 const dotenv = require("dotenv");
 const webpack = require("webpack");
+const fs = require("fs");
 
 module.exports = () => {
-  const fs = require("fs");
   fs.writeFileSync(
     "./.env",
     `REACT_APP_SERVER=${process.env.REACT_APP_SERVER}\n`
@@ -46,6 +46,7 @@ module.exports = () => {
       }),
       new CopyPlugin({
         patterns: [{ from: "images", to: "images" }],
+        patterns: [{ from: "public/_redirects", to: "." }],
       }),
       new webpack.DefinePlugin(envKeys),
       new webpack.ProvidePlugin({

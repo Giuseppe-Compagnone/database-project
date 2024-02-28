@@ -26,14 +26,14 @@ const Navbar = (props: NavbarProps) => {
     if (user) {
       if (
         ["/login", "/signup"].includes(pathname) &&
-        !pathname.includes("build/images")
+        !pathname.includes("images")
       ) {
         navigate("/");
       }
     } else {
       if (
         !["/login", "/signup"].includes(pathname) &&
-        !pathname.includes("build/images")
+        !pathname.includes("images")
       ) {
         navigate("/login");
       }

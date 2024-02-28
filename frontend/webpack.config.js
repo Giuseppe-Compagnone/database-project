@@ -45,9 +45,11 @@ module.exports = () => {
         template: path.resolve(__dirname, "public", "index.html"),
       }),
       new CopyPlugin({
-        patterns: [{ from: "images", to: "images" }],
-        patterns: [{ from: "public/_redirects", to: "." }],
-        patterns: [{ from: "public/favicon.png", to: "." }],
+        patterns: [
+          { from: "images", to: "images" },
+          { from: "public/_redirects", to: "." },
+          { from: "public/favicon.png", to: "." },
+        ],
       }),
       new webpack.DefinePlugin(envKeys),
       new webpack.ProvidePlugin({

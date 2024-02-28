@@ -5,6 +5,9 @@ const dotenv = require("dotenv");
 const webpack = require("webpack");
 
 module.exports = () => {
+  const fs = require("fs");
+  fs.writeFileSync("./.env", `REACT_APP_SERVER=${process.env.API_KEY}\n`);
+
   const env = dotenv.config().parsed;
 
   const envKeys = Object.keys(env).reduce((prev, next) => {

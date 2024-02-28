@@ -1,7 +1,7 @@
 export interface StudentPerformanceModel {
-  id: number;
-  student: number | string;
-  course: number | string;
+  performance_id: number;
+  student_id: number | string;
+  course_id: number | string;
   evaluation: number;
-  date: string;
+  completion_date: string;
 }

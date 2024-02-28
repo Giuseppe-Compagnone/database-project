@@ -5,10 +5,12 @@ export interface SqlServiceContent {
   user: TeacherModel | StudentModel | null;
   setUser: (val: TeacherModel | StudentModel | null) => void;
   type: "student" | "teacher" | null;
+  formatDate: (dateString: string) => string;
 }
 
 export const SqlServiceContext = createContext<SqlServiceContent>({
   user: null,
-  setUser: () => {},
+  setUser: (): any => {},
   type: null,
+  formatDate: (): any => {},
 });

@@ -133,3 +133,61 @@ export const enroll = async (studentId, courseName, date) => {
     [studentId, rows[0].course_id, date]
   );
 };
+
+export const getCourseByTitle = async (title) => {
+  const [rows] = await pool.query(
+    `
+    SELECT c.course_id,c.title,c.description,c.num_enrollments,start_date,end_date,CONCAT(t.name," ",t.surname) as responsible_teacher_id  
+FROM COURSE as c
+INNER JOIN TEACHER as t
+ON t.teacher_id = c.responsible_teacher_id
+WHERE title = ?
+  `,
+    [title]
+  );
+
+  return rows[0];
+};
+
+export const getMaterials = async (id) => {
+  const [rows] = await pool.query(
+    `
+    SELECT * FROM COURSE_MATERIAL
+    WHERE material_id = ?
+    `,
+    [id]
+  );
+
+  return rows;
+};
+
+export const uploadMaterial = async (
+  title,
+  description,
+  fileOrLink,
+  publicationDate,
+  courseId
+) => {
+  await pool.query(
+    `
+  INSERT INTO COURSE_MATERIAL ( title, description, file_or_link, publication_date, course_id) 
+  VALUES( ?, ?, ?, ?, ?)
+  `,
+    [title, description, fileOrLink, publicationDate, courseId]
+  );
+};
+
+export const getPerformances = async (id) => {
+  const [rows] = await pool.query(
+    `
+  SELECT p.performance_id,p.student_id,p.evaluation,p.completion_date,c.title as course_id 
+  FROM STUDENT_PERFORMANCE as p
+  INNER JOIN COURSE as c
+  ON c.course_id = p.course_id
+  WHERE student_id = ?
+  `,
+    [id]
+  );
+
+  return rows;
+};

@@ -3,11 +3,15 @@ import cors from "cors";
 import {
   createCourse,
   enroll,
+  getCourseByTitle,
   getCoursesForStudent,
   getCoursesForTeacher,
+  getMaterials,
+  getPerformances,
   login,
   registerStudent,
   registerTeacher,
+  uploadMaterial,
 } from "./database.js";
 
 const app = express();
@@ -38,6 +42,37 @@ app.get("/courses/:role/:id", async (req, res) => {
   } catch (err) {
     console.log(err);
     res.status(500).send("Error on getting courses");
+  }
+});
+
+app.get("/course/:title", async (req, res) => {
+  try {
+    const result = await getCourseByTitle(req.params.title);
+    res.json(result);
+  } catch (err) {
+    console.log(err);
+    res.status(500).send();
+  }
+});
+
+app.get("/materials/:id", async (req, res) => {
+  try {
+    const result = await getMaterials(req.params.id);
+
+    res.json(result || []);
+  } catch (err) {
+    console.log(err);
+    res.status(500).send();
+  }
+});
+
+app.get("/performances/:id", async (req, res) => {
+  try {
+    const result = await getPerformances(req.params.id);
+    res.json(result || []);
+  } catch (err) {
+    console.log(err);
+    res.status(500).send();
   }
 });
 
@@ -103,6 +138,22 @@ app.post("/create-course", async (req, res) => {
 app.post("/enroll", async (req, res) => {
   try {
     await enroll(req.body.studentId, req.body.courseName, req.body.date);
+    res.status(200).send();
+  } catch (err) {
+    console.log(err);
+    res.status(500).send();
+  }
+});
+
+app.post("/update-material", async (req, res) => {
+  try {
+    await uploadMaterial(
+      req.body.title,
+      req.body.description,
+      req.body.fileOrLink,
+      req.body.publicationDate,
+      req.body.courseId
+    );
     res.status(200).send();
   } catch (err) {
     console.log(err);

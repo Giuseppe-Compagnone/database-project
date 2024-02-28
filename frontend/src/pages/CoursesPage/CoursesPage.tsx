@@ -98,8 +98,7 @@ const CoursesPage = () => {
       await axios.post(`${process.env.SERVER}/enroll`, {
         studentId: (user as StudentModel).student_id,
         courseName: newCourse,
-        date: "2024-03-05",
-        // new Date().toISOString().substring(0, 10),
+        date: new Date().toISOString().substring(0, 10),
       });
       NotificationHandler.instance.success("Enrolled to " + newCourse);
       setCourses(null);

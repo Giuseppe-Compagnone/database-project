@@ -1,8 +1,8 @@
 export interface CourseMaterialModel {
-  id: number;
+  material_id: number;
   title: string;
-  desc: string;
-  link: string;
-  postDate: string;
-  course: number | string;
+  description: string;
+  file_or_link: string;
+  publication_date: string;
+  course_id: number | string;
 }

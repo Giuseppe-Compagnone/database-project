@@ -1,5 +1,7 @@
 @import "./components/components.scss";
 .course-page {
+  margin-bottom: 4rem;
+
   .header {
     position: relative;
     padding-bottom: 2rem;
@@ -41,5 +43,23 @@
     margin-top: 2rem;
     gap: 1.5rem;
     margin-bottom: 2rem;
+
+    .no-item {
+      font-size: 1.5rem;
+      width: 100%;
+      opacity: 0.6;
+      text-align: center;
+      height: 15rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .loading-wrapper {
+      height: 15rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
   }
 }

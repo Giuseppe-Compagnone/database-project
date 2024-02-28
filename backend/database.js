@@ -65,3 +65,20 @@ export const login = async (email, password) => {
 
   return rows;
 };
+
+export const getCoursesForUser = async (id) => {
+  const [rows] = await pool.query(
+    `
+    SELECT c.course_id,c.title,c.description,c.num_enrollments,c.start_date,c.end_date,CONCAT(t.name , ' ', t.surname)  as responsible_teacher_id 
+		FROM TEACHER as t       
+    INNER JOIN COURSE as c
+    ON t.teacher_id = c.responsible_teacher_id
+    INNER JOIN ENROLLMENT as e
+    ON c.course_id = e.course_id
+    WHERE e.student_id = ?
+  `,
+    [id]
+  );
+
+  return rows;
+};

@@ -1,6 +1,11 @@
 import express from "express";
 import cors from "cors";
-import { login, registerStudent, registerTeacher } from "./database.js";
+import {
+  getCoursesForUser,
+  login,
+  registerStudent,
+  registerTeacher,
+} from "./database.js";
 
 const app = express();
 app.use(express.json());
@@ -11,11 +16,27 @@ app.use((err, req, res, next) => {
   res.status(500).send("Something broke!");
 });
 
+//Get
 app.get("/", async (req, res) => {
   res.send("Server is running");
 });
 
-//Get
+app.get("/courses/:role/:id", async (req, res) => {
+  try {
+    let result;
+    if (req.params.role === "student") {
+      result = await getCoursesForUser(req.params.id);
+    }
+    if (req.params.role === "teacher") {
+      result = await getCoursesForUser(req.params.id);
+    }
+
+    res.json(result || []);
+  } catch (err) {
+    console.log(err);
+    res.status(500).send("Error on getting courses");
+  }
+});
 
 //Post
 

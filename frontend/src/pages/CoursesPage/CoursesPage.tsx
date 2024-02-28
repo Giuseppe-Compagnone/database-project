@@ -10,7 +10,7 @@ import {
 import { Button } from "../../components";
 import { faFileLines } from "@fortawesome/free-regular-svg-icons";
 import { useSqlService } from "../../../services";
-import { CourseModel } from "../../../models";
+import { CourseModel, StudentModel, TeacherModel } from "../../../models";
 import { NotificationHandler } from "../../../utils";
 import axios from "axios";
 
@@ -44,11 +44,30 @@ const CoursesPage = () => {
   //Methods
 
   const fetchCourse = async () => {
-    try {
-      axios.get(`${process.env.SERVER}`);
-    } catch (err) {
-      console.log(err);
-      NotificationHandler.instance.error("Error on getting courses");
+    if (type === "student") {
+      try {
+        const res = await axios.get(
+          `${process.env.SERVER}/courses/student/${
+            (user as StudentModel).student_id
+          }`
+        );
+        setCourses(res.data || []);
+      } catch (err) {
+        console.log(err);
+        NotificationHandler.instance.error("Error on getting courses");
+      }
+    } else {
+      try {
+        const res = await axios.get(
+          `${process.env.SERVER}/courses/teacher/${
+            (user as TeacherModel).teacher_id
+          }`
+        );
+        setCourses(res.data || []);
+      } catch (err) {
+        console.log(err);
+        NotificationHandler.instance.error("Error on getting courses");
+      }
     }
   };
 
@@ -56,31 +75,34 @@ const CoursesPage = () => {
     <div className="courses-page">
       <h1 className="title">Select a Course</h1>
       <div className="courses-grid">
-        <Course
-          name={"italiano"}
-          teacherName={"Giuseppe Compagnone"}
-          onClick={() => {
-            navigate("/course/italiano");
-          }}
-        />
-        <Course
-          name={"matematica"}
-          teacherName={"Giuseppe Aiello"}
-          onClick={() => {
-            navigate("/course/matematica");
-          }}
-        />
-        <div className="add">
-          <input
-            type="text"
-            placeholder="Enter course name..."
-            value={newCourse}
-            onChange={(e) => {
-              setNewCourse(e.target.value);
-            }}
-          />
-          <Button text={"Add"} onClick={() => {}} />
-        </div>
+        {courses.map((course, i) => {
+          return (
+            <>
+              <Course
+                key={i}
+                name={course.title}
+                teacherName={course.responsible_teacher_id as string}
+                onClick={() => {
+                  navigate(`/course/${course.title}`);
+                }}
+              />
+            </>
+          );
+        })}
+
+        {type === "student" && (
+          <div className="add">
+            <input
+              type="text"
+              placeholder="Enter course name..."
+              value={newCourse}
+              onChange={(e) => {
+                setNewCourse(e.target.value);
+              }}
+            />
+            <Button text={"Add"} onClick={() => {}} />
+          </div>
+        )}
       </div>
       {type == "teacher" && (
         <>

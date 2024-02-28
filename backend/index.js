@@ -1,7 +1,10 @@
 import express from "express";
 import cors from "cors";
 import {
-  getCoursesForUser,
+  createCourse,
+  enroll,
+  getCoursesForStudent,
+  getCoursesForTeacher,
   login,
   registerStudent,
   registerTeacher,
@@ -25,10 +28,10 @@ app.get("/courses/:role/:id", async (req, res) => {
   try {
     let result;
     if (req.params.role === "student") {
-      result = await getCoursesForUser(req.params.id);
+      result = await getCoursesForStudent(req.params.id);
     }
     if (req.params.role === "teacher") {
-      result = await getCoursesForUser(req.params.id);
+      result = await getCoursesForTeacher(req.params.id);
     }
 
     res.json(result || []);
@@ -78,6 +81,32 @@ app.post("/login", async (req, res) => {
     res.json(result[0]);
   } else {
     res.status(500).send("Incorrect email or password.");
+  }
+});
+
+app.post("/create-course", async (req, res) => {
+  try {
+    await createCourse(
+      req.body.title,
+      req.body.description,
+      req.body.responsibleTeacherId,
+      req.body.startDate,
+      req.body.endDate
+    );
+    res.status(200).send();
+  } catch (err) {
+    console.log(err);
+    res.status(500).send();
+  }
+});
+
+app.post("/enroll", async (req, res) => {
+  try {
+    await enroll(req.body.studentId, req.body.courseName, req.body.date);
+    res.status(200).send();
+  } catch (err) {
+    console.log(err);
+    res.status(500).send();
   }
 });
 

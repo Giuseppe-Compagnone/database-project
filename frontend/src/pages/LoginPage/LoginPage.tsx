@@ -66,6 +66,27 @@ const LoginPage = () => {
     })();
   }, []);
 
+  // useEffect(() => {
+  //   (async () => {
+  //     const hasher = md5.create();
+  //     hasher.update("Password123");
+
+  //     const password = hasher.hex();
+
+  //     try {
+  //       const res = await axios.post(`${process.env.SERVER}/login`, {
+  //         email: "alfredopulvirenti@gmail.com",
+  //         password: password,
+  //       });
+  //       setUser(res.data);
+  //       NotificationHandler.instance.success("Logged in");
+  //     } catch (err) {
+  //       console.log(err);
+  //       NotificationHandler.instance.error("Incorrenct username or password");
+  //     }
+  //   })();
+  // }, []);
+
   return (
     <div className="login-page">
       <Card

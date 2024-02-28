@@ -8,6 +8,7 @@ import { faBars } from "@fortawesome/free-solid-svg-icons";
 import Sidebar from "../Sidebar";
 import classNames from "classnames";
 import { useSqlService } from "../../../services";
+import Button from "../Button";
 
 const Navbar = (props: NavbarProps) => {
   //States
@@ -16,7 +17,7 @@ const Navbar = (props: NavbarProps) => {
   //Hooks
 
   const { pathname } = useLocation();
-  const { user } = useSqlService();
+  const { user, setUser } = useSqlService();
   const navigate = useNavigate();
 
   //Effects
@@ -50,9 +51,20 @@ const Navbar = (props: NavbarProps) => {
               <img src="build/images/logo.jpg" alt="logo" />
               Elearning System
             </Link>
-            <div className="avatar">
-              <UserPicture name={"Giuseppe Compagnone"} size={2.8} />
-            </div>
+            <div className="separator"></div>
+            {user && (
+              <Button
+                text={"Logout"}
+                onClick={() => {
+                  setUser(null);
+                }}
+              />
+            )}
+            {user && (
+              <div className="avatar">
+                <UserPicture name={user.name + " " + user.surname} size={2.8} />
+              </div>
+            )}
           </nav>
         )}
         <div className="page-content">

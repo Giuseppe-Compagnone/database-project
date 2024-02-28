@@ -1,6 +1,7 @@
 @import "./components/components.scss";
 
 .courses-page {
+  margin-bottom: 4rem;
   .title {
     margin-bottom: 2rem;
   }
@@ -11,6 +12,12 @@
     grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
     grid-gap: 20px;
     margin-bottom: 2rem;
+
+    .no-items {
+      font-size: 1.5rem;
+      width: 40rem;
+      opacity: 0.6;
+    }
 
     .add {
       width: 15rem;
